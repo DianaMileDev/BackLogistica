@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/user/login',(req, res)=>{
+router.post('/user/login',(req, res)=>{
     let valid = false;
     let status = 500;
     if(req.body.user == 'dimhernandez@hotmail.com' && req.body.pass == '123')
