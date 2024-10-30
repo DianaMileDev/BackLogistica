@@ -43,7 +43,14 @@ function getAll(entidad){
 }
 
 function getId(entidad, id){
+    return new Promise((resolve,reject)=> {
+        conn.query(`SELECT * FROM ${entidad} WHERE Id = ${id}`,(error,result)=>{
+            if(error)
+                return reject(error);
 
+            return resolve(result);
+        })
+    });
 }
 
 function add(entidad, datos){

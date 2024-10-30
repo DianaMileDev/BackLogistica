@@ -24,4 +24,11 @@ router.get('/user/lista', (req, res) =>{
     })
 })
 
+router.get('/user/:id', (req, res) =>{
+    const id = req.params.id;
+    const getId = controller.getId(id).then((items) => {
+        respuesta.success(req, res, 200, items);
+    })
+})
+
 module.exports = router
