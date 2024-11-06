@@ -53,6 +53,17 @@ function getId(entidad, id){
     });
 }
 
+function loginValidator(entidad, usu, cont){
+    return new Promise((resolve,reject)=> {
+        conn.query(`SELECT * FROM ${entidad} WHERE Usuario = '${usu}' AND Clave = '${cont}';`,(error,result)=>{
+            if(error)
+                return reject(error);
+
+            return resolve(result);
+        })
+    });
+}
+
 function add(entidad, datos){
 
 }
@@ -71,5 +82,6 @@ module.exports = {
     add,
     update,
     state,
+    loginValidator
 }
 

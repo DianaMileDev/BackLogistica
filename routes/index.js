@@ -4,10 +4,14 @@ const router = express.Router()
 const controller = require('../src/modulos/usuario/controller')
 
 router.post('/user/login',(req, res)=>{
-    if(req.body.user == 'dim@hotmail.com' && req.body.pass == '123'){
-        respuesta.success(req, res)
-    }
-    respuesta.error(req, res)
+    const {Usuario, Clave} = req.body;
+    controller.login(Usuario, Clave).then(result => {
+        if(result.length > 0){
+            respuesta.success(req, res, 200, result);
+        } else {
+            respuesta.error(req, res, 401, 'Usuario o clave incorrectos');
+        }
+    })
 })
 
 router.post('/user/crear',(req,res)=>{
