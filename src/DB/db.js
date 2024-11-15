@@ -1,5 +1,6 @@
 const mysql = require('mysql')
-const config = require('../config')
+const config = require('../config');
+const { query } = require('express');
 
 const dbConfig = {
     host: config.mysql.host,
@@ -64,8 +65,15 @@ function loginValidator(entidad, usu, cont){
     });
 }
 
-function add(entidad, datos){
-
+function add(entidad, Nombre, Correo, Contrasena, ConfirmarCont){
+    return new Promise((resolve,reject) => {
+        conn.query(`INSERT INTO ${entidad} (Nombre, Correo, Contrasena, ConfirmarCont) VALUES ('${Nombre}', '${Correo}', '${Contrasena}', '${ConfirmarCont}');`,(error, result) =>{
+            if (error)
+                return reject(error);
+            return resolve(result);        
+        })
+        console.log(`INSERT INTO ${entidad} (Nombre, Correo, Contrasena, ConfirmarCont) VALUES ('${Nombre}', '${Correo}', '${Contrasena}', '${ConfirmarCont}');`)
+    })
 }
 
 function update(entidad, datos){

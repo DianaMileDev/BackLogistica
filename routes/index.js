@@ -15,7 +15,14 @@ router.post('/user/login',(req, res)=>{
 })
 
 router.post('/user/crear',(req,res)=>{
-    respuesta.success(req, res, 200, 'Usuario Registrado')
+    console.log(req.body)
+    const Nombre = req.body.name;
+    const Correo = req.body.email;
+    const Contrasena = req.body.pass;
+    const ConfirmarCont = req.body.confirm;
+    const postRegister = controller.register(Nombre, Correo, Contrasena, ConfirmarCont).then((items) => {
+        respuesta.success(req, res, 200, items)
+    })
 })
 
 router.post('/contacto',(req, res)=>{
